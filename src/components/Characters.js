@@ -4,18 +4,17 @@ import axios from "axios";
 function Characters() {
 
     const [character, setChars] = useState([]);
-    const randNumber = Math.floor(Math.random() * 826);    
+    const [randNumber, setRandNumber] = useState(Math.floor(Math.random() * 826));    
 
     const baseurl = "https://rickandmortyapi.com/api/character/";
-    let randomUrl = baseurl + randNumber;
+    
 
     useEffect(() => {
+        let randomUrl = baseurl + randNumber
         axios.get(randomUrl)
         .then((res) => setChars(res.data));
-    }, []);
-
-    console.log(character);
-
+    }, [randNumber]);
+    
     return (
         <div class="main_page">
             <h1>Characters</h1>
@@ -40,7 +39,8 @@ function Characters() {
 
             <br></br>
 
-            <button >Random Character</button>
+            <button onClick={() => setRandNumber(Math.floor(Math.random() * 826))}>Random Character</button>
+           
         </div>
     );
 }
